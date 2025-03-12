@@ -42,3 +42,12 @@ kotlin {
         implementation("io.kvision:kvision-testutils:$kvisionVersion")
     }
 }
+
+tasks.register<Copy>("copyProductionExecutable") {
+    dependsOn("jsBrowserDistribution")
+    from("build/dist/js/productionExecutable")
+    into("docs")
+}
+tasks.named("build") {
+    dependsOn("copyProductionExecutable")
+}
